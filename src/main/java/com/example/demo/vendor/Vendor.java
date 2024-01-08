@@ -16,9 +16,18 @@ public class Vendor {
 	}
 	
 	public Vendor(String id, String name, String desc) {
+		super();
 		this.id = id;
-		this.setName(name);
-		this.setDesc(desc);
+		this.name = name;
+		this.desc = desc;
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
