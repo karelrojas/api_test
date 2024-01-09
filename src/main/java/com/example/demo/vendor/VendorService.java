@@ -13,9 +13,9 @@ public class VendorService {
 	private VendorRepository vendorRepo;
 	
 	//Gets list of vendors
-	public List<Vendor> getVendors() {
+	public List<Vendor> getVendors(String companyId) {
 		List<Vendor> vendorList = new ArrayList<>();
-		vendorRepo.findAll().forEach(v -> vendorList.add(v));
+		vendorRepo.findByCompanyId(companyId).forEach(v -> vendorList.add(v));
 		return vendorList;
 		
 	}

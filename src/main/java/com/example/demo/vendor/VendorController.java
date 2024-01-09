@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.company.Company;
+
 @RestController
 public class VendorController {
 	
@@ -18,27 +20,30 @@ public class VendorController {
 	@Autowired
 	private VendorService vendorService;
 
-	@GetMapping("/vendors")
-	public List<Vendor> getVendors() {
-		return vendorService.getVendors();
+	@GetMapping("/companies/{companyId}/vendors")
+	public List<Vendor> getVendors(@PathVariable String companyId) {
+		return vendorService.getVendors(companyId);
 	}
 	
-	@GetMapping("/vendors/{id}")
+	@GetMapping("/companies/{companyId}/vendors/{id}")
 	public Vendor getVendor(@PathVariable String id) {
 		return vendorService.getVendor(id);
 	}
 	
-	@PostMapping("/vendors")
-	public void addVendor(@RequestBody Vendor v) {
+	@PostMapping("/companies/{companyId}/vendors")
+	public void addVendor(@RequestBody Vendor v, @PathVariable String companyId) {
+		v.setCompany(new Company(companyId, "", ""));
 		vendorService.addVendor(v);
 	}
 	
-	@PutMapping("/vendors/{id}")
-	public void updateVendor(@RequestBody Vendor v, @PathVariable String id) {
+	@PutMapping("/companies/{companyId}/vendors/{id}")
+	public void updateVendor(@RequestBody Vendor v,@PathVariable String companyId, @PathVariable String id) {
+		if (v.getCompany().getId() != companyId)
+			v.setCompany(new Company(companyId, "", ""));
 		vendorService.updateVendor(id, v);
 	}
 
-	@DeleteMapping("/vendors/{id}")
+	@DeleteMapping("/companies/{companyId}/vendors/{id}")
 	public void deleteVendor(@PathVariable String id) {
 		vendorService.deleteVendor(id);
 	}
