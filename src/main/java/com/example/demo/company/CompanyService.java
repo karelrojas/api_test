@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class CompanyService {
 
+	private final CompanyRepository companyRepo;
+	
 	@Autowired
-	private CompanyRepository companyRepo;
+	public CompanyService(CompanyRepository companyRepo) {
+		this.companyRepo = companyRepo;
+	}
 	
 	public List<Company> getCompanies(){
 		List<Company> CompanyList = new ArrayList<>();

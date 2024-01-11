@@ -9,8 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class VendorService {
 
+	
+	private final VendorRepository vendorRepo;
+	
 	@Autowired
-	private VendorRepository vendorRepo;
+	public VendorService(VendorRepository vendorRepo) {
+		this.vendorRepo = vendorRepo;
+	}
 	
 	//Gets list of vendors
 	public List<Vendor> getVendors(String companyId) {

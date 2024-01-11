@@ -16,9 +16,12 @@ import com.example.demo.company.Company;
 @RestController
 public class VendorController {
 	
+	private final VendorService vendorService;
 	
 	@Autowired
-	private VendorService vendorService;
+	public VendorController(VendorService vendorService) {
+		this.vendorService = vendorService;
+	}
 
 	@GetMapping("/companies/{companyId}/vendors")
 	public List<Vendor> getVendors(@PathVariable String companyId) {
